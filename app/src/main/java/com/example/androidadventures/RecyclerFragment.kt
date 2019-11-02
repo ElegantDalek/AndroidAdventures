@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -16,16 +18,21 @@ private const val ARG_PARAM2 = "param2"
 /**
  * A simple [Fragment] subclass.
  * Activities that contain this fragment must implement the
- * [BigCards.OnFragmentInteractionListener] interface
+ * [RecyclerFragment.OnFragmentInteractionListener] interface
  * to handle interaction events.
- * Use the [BigCards.newInstance] factory method to
+ * Use the [RecyclerFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class BigCards : Fragment() {
+class RecyclerFragment : Fragment() {
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var viewAdapter: RecyclerView.Adapter<*>
+    private lateinit var viewManager: RecyclerView.LayoutManager
+
     private var listener: OnFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
     }
 
     override fun onCreateView(
@@ -33,7 +40,21 @@ class BigCards : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_big_cards, container, false)
+
+        val mDataSet: List<String> = listOf("Example 1", "Example 2")
+
+        viewManager = LinearLayoutManager(container!!.context)
+        viewAdapter = RecyclerAdapter(mDataSet)
+
+        val view: View =  inflater.inflate(R.layout.fragment_recycler, container, false)
+
+        recyclerView = view.findViewById<RecyclerView>(R.id.fragment_recycler).apply {
+            setHasFixedSize(true)
+            layoutManager = viewManager
+            adapter = viewAdapter
+        }
+
+        return view
     }
 
     // TODO: Rename method, update argument and hook method into UI event

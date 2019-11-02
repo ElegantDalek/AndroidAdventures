@@ -5,7 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 
-class BottomBarActivity : AppCompatActivity(), BigCards.OnFragmentInteractionListener {
+class BottomBarActivity : AppCompatActivity(), RecyclerFragment.OnFragmentInteractionListener {
+
     override fun onFragmentInteraction(uri: Uri) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
@@ -15,7 +16,9 @@ class BottomBarActivity : AppCompatActivity(), BigCards.OnFragmentInteractionLis
         setContentView(R.layout.activity_bottom_bar)
 
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        val newFragment: Fragment = BigCards()
+        val newFragment: Fragment = RecyclerFragment()
         fragmentTransaction.add(R.id.fragment_container, newFragment).commit()
+
+
     }
 }
