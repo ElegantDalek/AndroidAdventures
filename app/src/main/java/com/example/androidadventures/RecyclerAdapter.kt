@@ -13,7 +13,7 @@ class RecyclerAdapter (private val dataSet: List<String>):
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewHolder {
         val cardView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.main_card, parent, false) as MaterialCardView
+            .inflate(R.layout.big_card, parent, false) as MaterialCardView
 
         return RecyclerViewHolder(cardView)
     }
@@ -23,7 +23,7 @@ class RecyclerAdapter (private val dataSet: List<String>):
     }
 
     override fun onBindViewHolder(holder: RecyclerViewHolder, position: Int) {
-        val text: TextView = holder.view.findViewById(R.id.card_textview)
+        val text: TextView = holder.view.findViewById(R.id.big_card_text_title)
         text.text = dataSet[position]
     }
 }
