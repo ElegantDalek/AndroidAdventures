@@ -1,12 +1,19 @@
 package com.example.androidadventures
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 
+
+const val TITLE_INTENT = "title_message"
+
+class CardData (private val title: String, private val description: String, private val image: Int)
+
 class RecyclerAdapter (private val dataSet: List<String>):
+
     RecyclerView.Adapter<RecyclerAdapter.RecyclerViewHolder>() {
 
     class RecyclerViewHolder(val view: MaterialCardView): RecyclerView.ViewHolder(view)
@@ -24,6 +31,14 @@ class RecyclerAdapter (private val dataSet: List<String>):
 
     override fun onBindViewHolder(holder: RecyclerViewHolder, position: Int) {
         val text: TextView = holder.view.findViewById(R.id.big_card_text_title)
-        text.text = dataSet[position]
+        val title = dataSet[position]
+        text.text = title
+
+        holder.view.setOnClickListener {
+            val context = it.context
+            val intent = Intent(context, InfoActivity::class.java)
+            intent.putExtra(TITLE_INTENT, title)
+            context.startActivity(intent)
+        }
     }
 }
